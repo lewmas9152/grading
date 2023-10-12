@@ -1,57 +1,70 @@
 package grading;
+
 import java.util.Scanner;
 
 public class GradingB {
-    public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        String line = new String(new char[75]).replace('\0', '*');
-        int marks[][] = new int[4][3];
-        String names[] = new String[4];
-        int totals[] = new int[4];
-        int avg[] = new int[4];
-        int total;
-        String grade[] = new String[4];
-        for (int i = 0; i <=3; i++){
-            System.out.print("Enter name of Student: ");
-            names[i] = input.next();
-            total = 0;
-            for (int j = 0; j < 3;j++){
-                System.out.print("Enter mark " + j + ":");
-                marks[i][j] = input.nextInt();
-                total += marks[i][j];
-            }
-            totals[i] = total;
-            avg[i] = total/3;
-        }
-        for (int n = 0; n < 4; n++) {
-            if (avg[n] > 79.9) {
-                grade[n] = "A";
-            } else if (avg[n] > 74.9) {
-                grade[n] = "B+";
-            } else if (avg[n] > 64.9) {
-                grade[n] = "B";
-            } else if (avg[n] > 54.9) {
-                grade[n] = "C+";
-            } else if (avg[n] > 49.9) {
-                grade[n] = "C";
-            } else if (avg[n] > 39.9) {
-                grade[n] = "D";
-            } else{
-                grade[n] = "F";
-            }
-        }
-        
-        System.out.println(line);
-        System.out.println("\t\t\t\t\t\tSTUDENT MARKLIST");
-        System.out.println(line);
-        System.out.println("ROLL\tNAME\tMARK1\tMARK2\tMARK3\tTOTAL\tRESULT\tAverage\tGRADE");
 
-        for (int i = 0; i < 4; i++){
-            System.out.print((i + 100) + "\t\t" + names[i] + "\t");
-            for (int j = 0; j < 3;j++){
-                System.out.print(marks[i][j] + "\t\t");
-            }
-            System.out.print(totals[i] + "\t\tP\t\t" + (float)avg[i] + "\t" + grade[i] + "\n");
-        }
-    }
+	public static void main(String[] args) {
+		int totals[] = new int[4];
+		String results[] = new String[4];
+		double averages[] = new double[4];
+		String grades[] = new String[4];
+		int rollNumber[] = new int[4];
+		String names[] = new String[4];
+		int marks[][] = new int[4][3];
+		Scanner scanner = new Scanner(System.in);
+		for(int i = 0 ; i < rollNumber.length ; i++){
+			System.out.print("Enter the Student Roll Number: ");
+			int roll = new Integer(scanner.nextLine());
+			rollNumber[i] = roll;
+			System.out.print("Enter the Student Name :");
+			String name = scanner.nextLine();
+			names[i] = name;
+			System.out.println();
+			System.out.println("Enter the three marks  : ");
+			int total = 0;
+			for(int j = 0 ; j < 3 ; j++){
+				System.out.print("Mark"+(j+1)+" :");
+				int mark = new Integer(scanner.nextLine());
+				marks[i][j] = mark;
+				total += mark;
+			}
+			System.out.println("The total is  : "+ total);
+			totals[i] = total;
+			averages[i] = total/3;
+			if(averages[i] > 50){
+				results[i] = "P";
+			}
+			else{
+				results[i] = "F";
+			}
+			if(averages[i] >= 70 && averages[i] <=100){
+				grades[i] = "A";
+			}
+			else if(averages[i] >= 50){
+				grades[i] = "B";
+			}
+			else{
+				grades[i] = "C";
+			}
+		}
+		String line = new String(new char[66]).replace("\0", "*");
+		System.out.println(line);
+		System.out.println("\t\t\tSTUDENT MARKLIST");
+		System.out.println(line);
+		System.out.println("ROLL\tNAME\tMARK1\tMARK2\tMARK3\tTOTAL\tRESULT\tAverage\tGRADE");
+		for(int k = 0 ; k < 4 ; k++){
+			System.out.print(rollNumber[k]+"\t"+names[k]+"\t");
+			for(int l = 0 ; l < 3 ; l++){
+				System.out.print(marks[k][l]+"\t");
+			}
+			System.out.print(totals[k]+"\t");
+			System.out.print(results[k]+"\t");
+			System.out.print(averages[k]+"\t");
+			System.out.print(grades[k]+"\t");
+			System.out.println();
+		}
+
+	}
+
 }
